@@ -45,6 +45,7 @@ fun DetailScreen(movie: Movie?) {
                 text = stringResource(R.string.movie_overview),
                 style = MaterialTheme.typography.headlineSmall
             )
+            Spacer(Modifier.height(12.dp))
             Text(movie?.overView?.ifBlank { stringResource(R.string.no_overview) } ?: "")
         }
         /*if (movie.isNotEmpty()) {
