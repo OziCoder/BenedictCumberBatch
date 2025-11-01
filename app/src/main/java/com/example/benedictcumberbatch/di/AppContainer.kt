@@ -10,7 +10,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.moshi.MoshiConverterFactory
 
 interface AppContainer {
     val tmdbApi: TmdbApi
@@ -21,16 +20,10 @@ class DefaultAppContainer(
     baseUrl: String = "https://api.themoviedb.org/3/"
 ) : AppContainer {
 
-    private val moshi: Moshi by lazy {
-        Moshi.Builder()
-            .add(KotlinJsonAdapterFactory())
-            .build()
-    }
-
     private val client by lazy {
         OkHttpClient.Builder()
             // Add API key interceptor first
-            .addInterceptor(ApiInterceptor(BuildConfig.TMDB_API_KEY))
+            .addInterceptor(ApiInterceptor())
             .addInterceptor(
                 HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }
             )
