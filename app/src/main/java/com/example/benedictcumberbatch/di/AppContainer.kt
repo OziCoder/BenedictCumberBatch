@@ -1,11 +1,8 @@
 package com.example.benedictcumberbatch.di
 
-import com.example.benedictcumberbatch.BuildConfig
 import com.example.benedictcumberbatch.data.remote.TmdbApi
 import com.example.benedictcumberbatch.data.repo.MovieRepository
 import com.example.benedictcumberbatch.data.repo.MovieRepositoryImpl
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
