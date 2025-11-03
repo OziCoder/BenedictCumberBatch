@@ -34,10 +34,13 @@ android {
         val apiToken = (localProps.getProperty("TMDB_BEARER") ?: "")
         val imageBase = (localProps.getProperty("TMDB_IMAGE_BASE")
             ?: (project.findProperty("TMDB_IMAGE_BASE") as? String ?: "https://image.tmdb.org/t/p/"))
+        val baseUrl = (localProps.getProperty("TMDB_BASE_URL")
+            ?: (project.findProperty("TMDB_BASE_URL") as? String ?: "https://api.themoviedb.org/3/"))
 
         buildConfigField("String", "TMDB_API_KEY", "\"$apiKey\"")
         buildConfigField("String", "TMDB_IMAGE_BASE", "\"$imageBase\"")
         buildConfigField("String", "TMDB_BEARER", "\"$apiToken\"")
+        buildConfigField("String", "TMDB_BASE_URL", "\"$baseUrl\"")
     }
 
     buildTypes {
@@ -63,6 +66,9 @@ android {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
+    }
+    testOptions {
+        unitTests.isIncludeAndroidResources = true
     }
 }
 
@@ -120,4 +126,16 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0")
     testImplementation("io.mockk:mockk:1.13.12")
+    testImplementation("org.robolectric:robolectric:4.12.2")
+
+    // FragmentScenario works on Robolectric in unit tests
+    testImplementation("androidx.fragment:fragment-testing:1.8.5")
+    testImplementation("androidx.test:core-ktx:1.6.1")
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
+
+    // Compose testing on Robolectric (unit tests)
+    testImplementation("androidx.compose.ui:ui-test-junit4:composeBom")
+    debugImplementation("androidx.compose.ui:ui-test-manifest:composeBom")
+    testImplementation("androidx.compose.ui:ui-test-junit4")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
 }

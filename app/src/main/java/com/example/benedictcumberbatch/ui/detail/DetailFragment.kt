@@ -7,17 +7,10 @@ import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import com.example.benedictcumberbatch.di.appContainer
 import com.example.benedictcumberbatch.domain.model.Movie
 import com.example.benedictcumberbatch.extensions.safeParcelable
-import com.example.benedictcumberbatch.ui.common.DetailVMFactory
 
 class DetailFragment : Fragment() {
-
-    private val vm: DetailViewModel by viewModels {
-        DetailVMFactory(requireContext().appContainer.movieRepo)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, c: ViewGroup?, s: Bundle?): View =
         ComposeView(requireContext()).apply {

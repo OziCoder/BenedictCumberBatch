@@ -1,5 +1,6 @@
 package com.example.benedictcumberbatch.di
 
+import com.example.benedictcumberbatch.BuildConfig
 import com.example.benedictcumberbatch.data.remote.TmdbApi
 import com.example.benedictcumberbatch.data.repo.MovieRepository
 import com.example.benedictcumberbatch.data.repo.MovieRepositoryImpl
@@ -13,9 +14,7 @@ interface AppContainer {
     val movieRepo: MovieRepository
 }
 
-class DefaultAppContainer(
-    baseUrl: String = "https://api.themoviedb.org/3/"
-) : AppContainer {
+class DefaultAppContainer() : AppContainer {
 
     private val client by lazy {
         OkHttpClient.Builder()
@@ -29,7 +28,7 @@ class DefaultAppContainer(
 
     private val retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl(baseUrl)
+            .baseUrl(BuildConfig.TMDB_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
